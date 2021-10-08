@@ -59,17 +59,21 @@ export const matchToken = () => async (dispatch) => {
     let token = localStorage.getItem("token");
     var myHeaders = new Headers(); // Currently empty
     myHeaders.append("Authorization", "Bearer" + token);
+
     Api.post(ENDPOINTS.MATCH_TOKEN)
       .then(async (res) => {
+        console.log("token", res);
         if (res.data.status === false) {
           dispatch({ type: "LOGOUT_USER" });
+          console.log("token", "in logout");
+
           resolve(res?.data?.status);
         }
-        console.log(" res.data ", res.data.data.data);
+        console.log(" res.data ", res.data);
 
         await dispatch({
           type: ACTION_TYPE.MATCHTOKEN,
-          payload: res.data.data,
+          payload: res.data,
         });
 
         resolve(res?.data?.status);

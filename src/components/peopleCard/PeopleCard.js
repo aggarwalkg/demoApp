@@ -10,11 +10,10 @@ const PeopleCard = (props) => {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.AuthReducer);
 
-  console.log("props", userData.following);
   const handleSubmit = async () => {
     const type = userData?.following.includes(props.data._id);
     const params = {
-      userId: userData._id,
+      userId: userData?._id,
       followingId: props.data._id,
       type: type ? "unfollow" : "follow",
     };
@@ -40,7 +39,7 @@ const PeopleCard = (props) => {
             background="primary"
             color="tertiary"
             name={
-              userData.following.includes(props.data._id)
+              userData?.following.includes(props.data._id)
                 ? "Unfollow"
                 : "Follow"
             }

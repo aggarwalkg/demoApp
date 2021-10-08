@@ -24,6 +24,11 @@ export const AuthReducer = (state = initialState, action) => {
         userData: action.payload.data.data.data,
       };
     case ACTION_TYPE.MATCHTOKEN:
+      console.log(
+        "token in reducer",
+        action.payload,
+        JSON.stringify(action.payload.data)
+      );
       localStorage.setItem("token", action.payload.token);
       localStorage.setItem("user", JSON.stringify(action.payload.data));
 
